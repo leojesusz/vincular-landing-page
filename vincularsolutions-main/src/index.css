@@ -1,0 +1,250 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Vincular Design System */
+@layer base {
+  :root {
+    /* Vincular Brand Colors */
+    --petrol-medium: 182 100% 13%;
+    --petrol-dark: 182 97% 8%;
+    --ice: 180 29% 93%;
+    --petrol-green: 180 87% 28%;
+    
+    /* Design System Mapping */
+    --background: var(--ice);
+    --foreground: var(--petrol-dark);
+    
+    --card: 0 0% 100%;
+    --card-foreground: var(--petrol-dark);
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: var(--petrol-dark);
+    
+    --primary: var(--petrol-medium);
+    --primary-foreground: var(--ice);
+    
+    --secondary: var(--ice);
+    --secondary-foreground: var(--petrol-medium);
+    
+    --muted: var(--ice);
+    --muted-foreground: var(--petrol-medium);
+    
+    --accent: var(--petrol-green);
+    --accent-foreground: var(--ice);
+    
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: var(--ice);
+    
+    --border: 180 15% 85%;
+    --input: 180 15% 85%;
+    --ring: var(--petrol-green);
+    
+    --radius: 0.75rem;
+    
+    /* Slide-specific backgrounds */
+    --slide-contractors: var(--petrol-medium);
+    --slide-professionals: var(--petrol-dark);
+    --slide-investors: var(--ice);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-montserrat;
+    overflow-x: hidden;
+    will-change: scroll-position;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+
+  /* Slide Components (CORRIGIDO) */
+  .slide-container {
+    @apply w-full flex transition-transform duration-500 ease-in-out;
+    min-height: calc(100vh - 64px);
+  }
+  
+  .slide {
+    @apply w-full flex-shrink-0;
+    min-height: calc(100vh - 64px);
+  }
+  
+  .slide-contractors {
+    background: hsl(var(--slide-contractors));
+    color: hsl(var(--ice));
+  }
+  
+  .slide-professionals {
+    background: hsl(var(--slide-professionals));
+    color: hsl(var(--ice));
+  }
+  
+  .slide-investors {
+    background: hsl(var(--slide-investors));
+    color: hsl(var(--petrol-dark));
+  }
+  
+  .header-fixed {
+    @apply fixed top-0 left-0 right-0 z-50 bg-secondary/95 backdrop-blur-sm border-b border-border;
+    min-height: 64px;
+    transform: translateZ(0);
+  }
+
+  /* Footer fix */
+  footer {
+    position: relative;
+    transform: translateZ(0);
+    z-index: 10;
+  }
+  
+  /* CTA Buttons */
+  .cta-primary {
+    @apply bg-accent hover:bg-accent/90 text-accent-foreground px-8 py-4 rounded-lg font-semibold text-lg;
+    box-shadow: var(--shadow-floating);
+    transition: var(--transition-smooth);
+  }
+  
+  .cta-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px hsl(var(--petrol-green) / 0.3);
+  }
+  
+  .cta-secondary {
+    @apply border-2 border-current hover:bg-current hover:text-background px-8 py-4 rounded-lg font-semibold text-lg;
+    transition: var(--transition-smooth);
+  }
+  
+  /* Navigation Dots */
+  .nav-dots {
+    @apply fixed bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 z-40;
+  }
+  
+  .nav-dot {
+    @apply w-3 h-3 rounded-full border-2 cursor-pointer;
+    transition: var(--transition-smooth);
+  }
+  
+  .nav-dot.active {
+    @apply bg-accent border-accent;
+  }
+  
+  .nav-dot.inactive {
+    @apply bg-transparent border-current opacity-60 hover:opacity-100;
+  }
+  
+  /* WhatsApp Button */
+  .whatsapp-button {
+    @apply fixed bottom-6 right-6 w-16 h-16 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center text-white text-2xl z-50;
+    box-shadow: var(--shadow-floating);
+    transition: var(--transition-bounce);
+  }
+  
+  .whatsapp-button:hover {
+    transform: scale(1.1);
+  }
+  
+  /* Cards and Panels */
+  .feature-card {
+    @apply bg-card/80 backdrop-blur-sm rounded-xl p-6 border border-border;
+    box-shadow: var(--shadow-soft);
+  }
+  
+  .step-card {
+    @apply bg-white text-petrol-dark rounded-xl p-6 border border-border;
+    box-shadow: var(--shadow-soft);
+  }
+  
+  /* Mobile responsive improvements */
+  @media (max-width: 640px) {
+    .nav-dots {
+      bottom: 20px;
+    }
+    
+    .whatsapp-button {
+      width: 50px;
+      height: 50px;
+      bottom: 80px;
+      right: 16px;
+    }
+    
+    .step-card, .feature-card {
+      padding: 1rem !important;
+    }
+    
+    .cta-primary, .cta-secondary {
+      padding: 0.75rem 1.5rem !important;
+      font-size: 0.875rem !important;
+    }
+  }
+}
+
+@layer utilities {
+  .font-montserrat {
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  .text-petrol-medium {
+    color: hsl(var(--petrol-medium));
+  }
+  
+  .text-petrol-dark {
+    color: hsl(var(--petrol-dark));
+  }
+  
+  .text-ice {
+    color: hsl(var(--ice));
+  }
+  
+  .bg-petrol-medium {
+    background-color: hsl(var(--petrol-medium));
+  }
+  
+  .bg-petrol-dark {
+    background-color: hsl(var(--petrol-dark));
+  }
+  
+  .bg-ice {
+    background-color: hsl(var(--ice));
+  }
+  
+  .bg-petrol-green {
+    background-color: hsl(var(--petrol-green));
+  }
+  
+  .border-petrol-medium {
+    border-color: hsl(var(--petrol-medium));
+  }
+  
+  .shadow-vincular {
+    box-shadow: var(--shadow-soft);
+  }
+  
+  .shadow-vincular-elevated {
+    box-shadow: var(--shadow-elevated);
+  }
+}
