@@ -56,7 +56,7 @@ const VincularLanding = () => {
           onClick={() => setShowAboutModal(true)}
           className="flex items-center space-x-3 hover:opacity-80 transition-opacity"
         >
-          <img src="/uploads/logo.png" alt="Vincular" className="h-24 w-auto" />
+          <img src="/uploads/logo.jpeg" alt="Vincular" className="h-24 w-auto" />
         </button>
       </div>
     </header>
